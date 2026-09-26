@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d4" for="edge" attr.name="highway" attr.type="string"/>
+<key id="d3" for="edge" attr.name="length" attr.type="double"/>
+<key id="d2" for="node" attr.name="y" attr.type="double"/>
+<key id="d1" for="node" attr.name="x" attr.type="double"/>
+<key id="d0" for="graph" attr.name="crs" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">epsg:4326</data>
+<node id="101">
+  <data key="d1">-0.125</data>
+  <data key="d2">51.515</data>
+</node>
+<node id="102">
+  <data key="d1">-0.124</data>
+  <data key="d2">51.514</data>
+</node>
+<node id="103">
+  <data key="d1">-0.123</data>
+  <data key="d2">51.513</data>
+</node>
+<node id="104">
+  <data key="d1">-0.122</data>
+  <data key="d2">51.512</data>
+</node>
+<node id="105">
+  <data key="d1">-0.121</data>
+  <data key="d2">51.511</data>
+</node>
+<edge source="101" target="102" id="0">
+  <data key="d3">120.0</data>
+  <data key="d4">residential</data>
+</edge>
+<edge source="102" target="103" id="0">
+  <data key="d3">110.0</data>
+  <data key="d4">residential</data>
+</edge>
+<edge source="103" target="104" id="0">
+  <data key="d3">130.0</data>
+  <data key="d4">residential</data>
+</edge>
+<edge source="104" target="105" id="0">
+  <data key="d3">115.0</data>
+  <data key="d4">residential</data>
+</edge>
+</graph></graphml>

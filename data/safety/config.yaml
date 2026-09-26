@@ -1,0 +1,16 @@
+dataset:
+  year: '2022'
+  collision_file: data/raw/safety/dft-road-casualty-statistics-collision-2022.csv
+  download_url: https://data.dft.gov.uk/road-accidents-safety-data/dft-road-casualty-statistics-collision-2022.csv
+crs:
+  input: EPSG:4326
+  internal: EPSG:4326
+  projected: EPSG:3857
+matching:
+  max_distance_meters: 50
+sampling:
+  random_seed: 42
+directories:
+  raw: data/raw/safety
+  processed_safety: data/processed/safety
+  processed_training: data/processed/training

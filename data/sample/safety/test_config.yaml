@@ -1,0 +1,15 @@
+crs:
+  input: EPSG:4326
+  internal: EPSG:4326
+  projected: EPSG:3857
+dataset:
+  collision_file: data/sample/safety/sample_stats19.csv
+  year: '2022'
+directories:
+  processed_safety: data/sample/safety
+  processed_training: data/sample/safety
+  raw: data/sample/safety
+matching:
+  max_distance_meters: 50
+sampling:
+  random_seed: 42

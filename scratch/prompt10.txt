@@ -1,0 +1,927 @@
+<USER_REQUEST>
+We are now moving Route Resilience from ML experimentation into FINAL SYSTEM INTEGRATION and DEMO mode.
+
+==================================================
+IMPORTANT PROJECT DECISION
+==================================================
+
+The graph-healing ML pipeline is FROZEN.
+
+Production graph healing MUST use:
+
+- V4-C Random Forest
+- threshold = 0.75
+- existing frozen candidate generation
+- existing frozen validation
+- existing graph-healing implementation
+
+DO NOT:
+
+- modify the ML model
+- change the threshold
+- implement V8 Rule 4
+- implement V9 changes
+- add new ML features
+- retrain the model
+- change candidate generation
+- change validation logic
+- fabricate map coordinates
+- fabricate road geometry
+- fabricate backend metrics
+
+The goal now is to make the frontend demonstrate the COMPLETE Route Resilience pipeline clearly, reliably, and visually.
+
+==================================================
+CORE PROJECT ARCHITECTURE
+==================================================
+
+The final system should communicate this pipeline:
+
+Incomplete / Damaged Graph
+        ↓
+Graph Healing
+        ↓
+Healed Graph
+        ↓
+Existing Route Optimizer
+        ↓
+Route Alternatives
+        ↓
+Flood / Road Disruption Scenario
+        ↓
+Affected Route
+        ↓
+Alternative Route
+        ↓
+Resilience Evaluation
+        ↓
+Frontend Visualization
+
+
+==================================================
+CURRENT TECHNOLOGY STACK
+==================================================
+
+FRONTEND:
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Leaflet
+
+BACKEND:
+
+- FastAPI
+- Existing graph APIs
+- Existing resilience API
+- Existing route APIs
+- Existing real OSM geometry pipeline
+
+DATA / NETWORK:
+
+- OpenStreetMap road network
+- Existing healed graph
+- Existing traffic/congestion pipeline
+- Existing safety/weather features
+- Existing resilience engine
+
+Do NOT replace the existing architecture with mock data.
+
+==================================================
+PHASE 1 — INSPECT THE EXISTING PROJECT
+==================================================
+
+Before changing anything:
+
+1. Inspect the complete frontend structure.
+2. Inspect existing API functions.
+3. Inspect existing TypeScript types.
+4. Inspect existing map components.
+5. Inspect existing route components.
+6. Inspect existing graph-state logic.
+7. Inspect the backend API definitions.
+8. Inspect existing resilience/disruption functionality.
+9. Identify what already works.
+10. Reuse working components instead of rewriting them.
+
+Do not unnecessarily rewrite existing functionality.
+
+Do not invent endpoint names.
+
+Use the actual backend endpoints and response schemas already present in the project.
+
+==================================================
+PHASE 2 — GRAPH STATE CONTROL
+==================================================
+
+Add or verify a clear graph-state selector:
+
+- Original
+- Damaged
+- Healed
+
+The selected state must actually correspond to the backend graph state.
+
+When "Original" is selected:
+- display the original graph/network.
+
+When "Damaged" is selected:
+- display the damaged/incomplete graph.
+
+When "Healed" is selected:
+- use the backend healed graph.
+- display actual healed graph geometry.
+
+DO NOT generate fake healed roads in the frontend.
+
+Show a compact graph status panel:
+
+Graph State
+----------------
+Original / Damaged / Healed
+
+If backend statistics are available, display:
+
+- nodes
+- edges
+- graph version
+- candidates generated
+- validated candidates
+- accepted/recovered edges
+
+Only display values actually returned by the backend.
+
+==================================================
+PHASE 3 — GRAPH HEALING PANEL
+==================================================
+
+Create or verify a compact "Graph Healing" panel.
+
+Display:
+
+Graph Healing
+----------------
+Input: Damaged Graph
+Model: V4-C Random Forest
+Threshold: 0.75
+Output: Healed Graph
+
+If backend metrics are available, show:
+
+- candidates generated
+- candidates validated
+- accepted/recovered edges
+- precision
+- recall
+- F1
+
+Do NOT show experimental V7/V8/V9 results in the main UI.
+
+Do NOT describe the ML model as "drawing roads."
+
+Use wording such as:
+
+"ML identifies plausible missing connections between existing road segments. Validated candidates are merged into the healed graph."
+
+The graph-healing UI should communicate that:
+
+Damaged Graph
+      ↓
+Candidate Connections
+      ↓
+ML Prediction
+      ↓
+Validation
+      ↓
+Healed Graph
+
+==================================================
+PHASE 4 — MAP VISUALIZATION
+==================================================
+
+The map must be the main visual element of the application.
+
+Use the EXISTING real OSM geometry returned by the backend.
+
+Display:
+
+- road network
+- selected graph state
+- origin
+- destination
+- Route A
+- Route B
+- Route C
+- affected/disrupted road when a scenario is active
+
+Do NOT fabricate coordinates.
+
+Do NOT create artificial road geometry.
+
+Use actual GeoJSON LineString geometry returned by the backend.
+
+The map should remain visually clean and understandable.
+
+Routes must be visually distinguishable.
+
+The affected/disrupted segment must be clearly distinguishable from normal roads.
+
+==================================================
+PHASE 5 — ROUTE OPTIONS
+==================================================
+
+Create or verify route cards for:
+
+Route A
+Route B
+Route C
+
+Each route card should display backend-provided information such as:
+
+- distance
+- estimated travel time
+- congestion
+- safety risk
+- weather exposure
+- disrupted edges
+- detour distance
+- alternative path availability
+
+Only display metrics actually returned by the backend.
+
+If a value is unavailable:
+
+Display:
+
+"N/A"
+
+Do NOT fabricate values.
+
+Do not label a route as "best" unless the backend explicitly provides a documented selection criterion.
+
+Use neutral labels:
+
+- Route A
+- Route B
+- Route C
+- Affected Route
+- Alternative Route
+
+==================================================
+PHASE 6 — FLOOD / ROAD DISRUPTION SIMULATION
+==================================================
+
+FLOOD SIMULATION IS A CORE PART OF THE FINAL DEMO.
+
+Do NOT remove it.
+Do NOT simplify it into a visual-only animation.
+
+The flood scenario must demonstrate how the routing system behaves when an actual road becomes disrupted.
+
+IMPORTANT SCIENTIFIC LIMITATION:
+
+This is a SIMULATED FLOOD-INDUCED ROAD DISRUPTION.
+
+It is NOT a real flood-depth prediction system unless the backend explicitly provides flood-depth or flood-extent data.
+
+Do NOT claim:
+
+- real-time flood prediction
+- flood depth prediction
+- exact flood extent prediction
+- guaranteed flood-safe routing
+
+Use wording:
+
+"Simulated flood-induced road disruption"
+
+or:
+
+"Flood disruption scenario"
+
+==================================================
+PHASE 7 — FLOOD SCENARIO WORKFLOW
+==================================================
+
+The flood workflow must be:
+
+1. Start with the HEALED GRAPH.
+2. Generate Route A/B/C.
+3. Allow the user to activate a flood scenario.
+4. Select or use an actual backend-supported road segment.
+5. Apply the existing backend disruption mechanism.
+6. Mark the affected segment as disrupted.
+7. Preserve its actual OSM geometry.
+8. Display the affected segment on the map.
+9. Recalculate/update route results.
+10. Identify affected route(s).
+11. Display alternative route(s).
+12. Update resilience metrics.
+
+The flood simulation MUST use the existing backend resilience/disruption mechanism.
+
+Do not create a fake frontend-only flood road.
+
+The affected segment must correspond to an actual backend graph edge.
+
+==================================================
+PHASE 8 — FLOOD UI
+==================================================
+
+Add a prominent control:
+
+"🌊 Simulate Flood"
+
+When activated, show a scenario panel:
+
+Flood Scenario
+----------------
+Status: Active
+Disruption Type: Flood
+Affected Segment: <actual segment information if available>
+
+If the backend provides:
+- segment ID
+- road name
+- disruption type
+- geometry
+
+display those values.
+
+If a value is unavailable, do not invent it.
+
+Show:
+
+Status:
+"Road disruption simulated"
+
+==================================================
+PHASE 9 — FLOOD MAP BEHAVIOR
+==================================================
+
+When flood simulation is active, the map must show:
+
+1. Origin
+2. Destination
+3. Existing route(s)
+4. Flood-affected road
+5. Alternative route(s)
+
+The affected road must use its REAL GeoJSON geometry.
+
+Do NOT draw a fake flood road somewhere else on the map.
+
+If the backend returns affected-edge geometry:
+
+Use that geometry directly.
+
+If the backend returns the disrupted edge as part of the route/resilience response:
+
+Use that geometry directly.
+
+The affected segment should be visually prominent.
+
+The UI should make it immediately obvious:
+
+"This is the road affected by the simulated flood."
+
+==================================================
+PHASE 10 — BEFORE / AFTER FLOOD
+==================================================
+
+The frontend should clearly show the difference between:
+
+BEFORE FLOOD
+
+and
+
+AFTER FLOOD
+
+Before Flood:
+
+- Route A/B/C
+- distance
+- travel time
+- congestion
+- resilience-related metrics
+
+After Flood:
+
+- affected route
+- affected segment
+- updated route
+- alternative route
+- updated travel time
+- detour
+- disrupted edges
+- resilience information
+
+Create a compact comparison panel:
+
+                BEFORE        AFTER
+
+Route Status      Open         Affected
+
+Travel Time       X            Y
+
+Distance          X            Y
+
+Detour            0            Z
+
+Disrupted Edges   0            N
+
+Only display actual backend values.
+
+If a metric is unavailable, display N/A.
+
+==================================================
+PHASE 11 — ROUTE RESPONSE AFTER FLOOD
+==================================================
+
+After flood simulation:
+
+1. Determine whether a route intersects the disrupted segment using backend-provided route/disruption information.
+2. Update route cards.
+3. Display affected route status.
+4. Display alternative route(s).
+5. Update resilience metrics.
+6. Update map geometry.
+
+Do not infer unsupported route status from visual appearance alone if the backend already provides authoritative information.
+
+The backend should remain the source of truth.
+
+==================================================
+PHASE 12 — RESILIENCE PANEL
+==================================================
+
+Create or verify a "Route Resilience" panel.
+
+Display backend-provided metrics such as:
+
+- travel distance
+- travel time
+- average congestion
+- maximum congestion
+- safety exposure
+- weather exposure
+- disrupted edges
+- alternative paths
+- detour distance
+
+Use clear labels.
+
+Explain resilience using simple language:
+
+"Resilience indicates how well the route/network continues to provide viable travel options when conditions change or roads are disrupted."
+
+Do NOT call the resilience score a probability.
+
+Do NOT claim:
+
+- guaranteed safety
+- guaranteed disaster survival
+- perfect prediction
+- guaranteed route availability
+
+==================================================
+PHASE 13 — BEFORE/AFTER USER EXPERIENCE
+==================================================
+
+The complete demo should support this exact sequence:
+
+STEP 1
+Load graph.
+
+↓
+
+STEP 2
+Show Original Graph.
+
+↓
+
+STEP 3
+Switch to Damaged Graph.
+
+↓
+
+STEP 4
+Show graph damage/incomplete topology.
+
+↓
+
+STEP 5
+Run/show Graph Healing.
+
+↓
+
+STEP 6
+Switch to Healed Graph.
+
+↓
+
+STEP 7
+Generate Route A/B/C.
+
+↓
+
+STEP 8
+Explain that the routes are currently available.
+
+↓
+
+STEP 9
+Click:
+
+"🌊 Simulate Flood"
+
+↓
+
+STEP 10
+Show the actual affected road.
+
+↓
+
+STEP 11
+Show which route is affected.
+
+↓
+
+STEP 12
+Recalculate/update route results.
+
+↓
+
+STEP 13
+Show alternative route.
+
+↓
+
+STEP 14
+Display before/after resilience metrics.
+
+This sequence should be understandable to a judge watching the demo without requiring them to understand the backend implementation.
+
+==================================================
+PHASE 14 — UI DESIGN
+==================================================
+
+Use the existing project theme.
+
+The UI should look like a serious transportation/resilience dashboard rather than a generic CRUD application.
+
+Preferred structure:
+
+-------------------------------------------------------
+| ROUTE RESILIENCE                                    |
+|-----------------------------------------------------|
+| Graph State | Scenario | System Status              |
+|-----------------------------------------------------|
+|                                                     |
+|                       MAP                           |
+|                                                     |
+|-----------------------------------------------------|
+| Route A | Route B | Route C                         |
+|-----------------------------------------------------|
+|                                                     |
+| Flood Scenario / Before vs After                    |
+|                                                     |
+|-----------------------------------------------------|
+| Route Resilience Metrics                            |
+-------------------------------------------------------
+
+The map should remain dominant.
+
+Use:
+
+- cards
+- badges
+- icons
+- status indicators
+- clear section headings
+- compact metric displays
+
+Avoid excessive text.
+
+The most important information should be visible without scrolling excessively.
+
+==================================================
+PHASE 15 — SYSTEM STATUS
+==================================================
+
+Add a compact status indicator where appropriate:
+
+Backend:
+Connected / Disconnected
+
+Graph:
+Loaded / Loading / Error
+
+Graph Healing:
+Ready / Running / Complete / Error
+
+Routing:
+Ready / Loading / Error
+
+Flood Scenario:
+Inactive / Active
+
+This helps during the live demonstration.
+
+==================================================
+PHASE 16 — LOADING AND ERROR STATES
+==================================================
+
+Add proper states for:
+
+- loading graph
+- healing graph
+- loading routes
+- applying flood scenario
+- recalculating routes
+- backend unavailable
+- empty route response
+- invalid API response
+- invalid graph state
+- disruption failure
+
+Do not silently fail.
+
+Show useful user-facing messages.
+
+Examples:
+
+"Loading healed graph..."
+
+"Calculating alternative routes..."
+
+"Applying simulated flood disruption..."
+
+"Unable to retrieve route data from backend."
+
+Do not expose raw stack traces to the user.
+
+==================================================
+PHASE 17 — API INTEGRATION
+==================================================
+
+Inspect the existing backend API definitions before modifying the frontend.
+
+Reuse existing endpoints.
+
+Do NOT invent endpoint names.
+
+Verify actual response schemas.
+
+Maintain strong TypeScript types for:
+
+- GraphStats
+- GraphState
+- GraphVersion
+- Route
+- RouteGeometry
+- GeoJSON
+- DisruptedEdge
+- FloodScenario
+- ResilienceMetrics
+
+Keep API communication separated from presentation components.
+
+Prefer a structure such as:
+
+src/
+  api/
+  components/
+  types/
+  hooks/
+  utils/
+
+Only introduce new folders if consistent with the existing project structure.
+
+==================================================
+PHASE 18 — GEOJSON / GEOMETRY HANDLING
+==================================================
+
+Verify all geometry handling.
+
+Backend geometry should be treated as:
+
+GeoJSON LineString
+coordinates:
+
+[longitude, latitude]
+
+React Leaflet expects:
+
+[latitude, longitude]
+
+Make sure the existing conversion is correct.
+
+Do not reverse coordinates incorrectly.
+
+Do not fabricate fallback coordinates.
+
+If geometry is missing:
+
+display a clear fallback state rather than inventing geometry.
+
+==================================================
+PHASE 19 — FLOOD SCENARIO SAFETY / SCIENTIFIC WORDING
+==================================================
+
+Use:
+
+"Simulated flood-induced road disruption"
+
+"Flood disruption scenario"
+
+"Disrupted road segment"
+
+"Alternative route"
+
+"Route resilience"
+
+Do NOT use:
+
+"Real-time flood prediction"
+
+"Exact flood prediction"
+
+"Flood depth prediction"
+
+"Guaranteed flood-safe route"
+
+"Guaranteed safest route"
+
+unless the backend actually supports those claims.
+
+The purpose of the flood simulation is to demonstrate how the route network responds when a road becomes unavailable or unreliable during a disaster scenario.
+
+==================================================
+PHASE 20 — IMPORTANT DATA INTEGRITY RULES
+==================================================
+
+Never fabricate:
+
+- coordinates
+- road geometry
+- route distance
+- travel time
+- congestion
+- safety risk
+- weather values
+- resilience values
+- disruption information
+
+If backend data is unavailable:
+
+use:
+
+"N/A"
+
+or:
+
+"Data unavailable"
+
+The frontend must remain a visualization layer over the real backend system.
+
+==================================================
+PHASE 21 — TESTING
+==================================================
+
+After implementation:
+
+1. Run frontend tests.
+2. Run TypeScript type checking.
+3. Run production build.
+4. Start backend.
+5. Start frontend.
+6. Verify API connectivity.
+7. Verify graph-state switching.
+8. Verify graph healing.
+9. Verify actual healed geometry.
+10. Verify route generation.
+11. Verify Route A/B/C display.
+12. Verify flood simulation.
+13. Verify affected road geometry.
+14. Verify affected route.
+15. Verify alternative route.
+16. Verify resilience metrics.
+17. Verify before/after comparison.
+18. Verify loading/error states.
+
+Do NOT remove existing tests.
+
+Add tests for important new UI behavior.
+
+==================================================
+PHASE 22 — FINAL DEMO ACCEPTANCE CRITERIA
+==================================================
+
+The implementation is complete only if a user can demonstrate:
+
+                    ORIGINAL GRAPH
+                          ↓
+                    DAMAGED GRAPH
+                          ↓
+                    GRAPH HEALING
+                          ↓
+                     HEALED GRAPH
+                          ↓
+                    ROUTE A / B / C
+                          ↓
+                 🌊 SIMULATE FLOOD
+                          ↓
+                 AFFECTED ROAD
+                          ↓
+                  AFFECTED ROUTE
+                          ↓
+                  ALTERNATIVE ROUTE
+                          ↓
+              BEFORE / AFTER COMPARISON
+                          ↓
+                ROUTE RESILIENCE
+
+using REAL backend data and REAL OSM geometry.
+
+The flood simulation must be clearly visible.
+
+The graph healing must be clearly visible.
+
+The route change after disruption must be clearly visible.
+
+The resilience metrics must update based on backend responses.
+
+==================================================
+PHASE 23 — DO NOT START NEW ML WORK
+==================================================
+
+This is extremely important.
+
+The ML experimentation phase is COMPLETE.
+
+Do NOT:
+
+- run another threshold sweep
+- add another feature
+- modify V4-C
+- implement Rule 4
+- implement V8
+- implement V9
+- retrain the Random Forest
+- optimize F1
+- change candidate generation
+- change validation
+
+The production graph-healing configuration remains:
+
+V4-C
+Random Forest
+threshold = 0.75
+
+Focus entirely on system integration and demonstration.
+
+==================================================
+PHASE 24 — FINAL OUTPUT FROM ANTIGRAVITY
+==================================================
+
+After implementation, provide a concise report containing:
+
+1. Files changed
+2. Components created/modified
+3. APIs used
+4. Graph states implemented
+5. Flood simulation implementation
+6. Route visualization implementation
+7. Resilience panel implementation
+8. Tests run
+9. TypeScript check result
+10. Production build result
+11. Backend/frontend integration result
+12. Any remaining issues
+
+Also explicitly confirm:
+
+- no fabricated coordinates
+- no fabricated route metrics
+- no fabricated flood geometry
+- V4-C threshold remains 0.75
+- existing backend remains the source of truth
+- flood simulation uses the existing disruption/resilience mechanism
+
+FINAL GOAL:
+
+Make the Route Resilience frontend tell one clear story:
+
+"An incomplete road network is healed using validated ML-based graph recovery. The healed network is then used to generate route alternatives. When a flood-induced road disruption occurs, the system identifies the affected route, recalculates alternatives, and compares route resilience."
+
+Do not overcomplicate the interface.
+
+Do not start another ML experiment.
+
+Build the final integrated demo.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-26T04:25:41+05:30.
+</ADDITIONAL_METADATA>

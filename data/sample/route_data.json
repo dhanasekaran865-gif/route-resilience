@@ -1,0 +1,75 @@
+{
+  "route_id": "R001",
+  "segments": [
+    {
+      "segment_id": "SEG_001",
+      "road_type": "residential",
+      "road_width": 5.5,
+      "road_surface": "asphalt",
+      "road_condition": 0.8,
+      "intersection_density": 0.2,
+      "traffic_level": 0.2,
+      "congestion": 0.1,
+      "vehicle_density": 0.2,
+      "lighting": 0.9,
+      "pedestrian_density": 0.3,
+      "weather_risk": 0.1
+    },
+    {
+      "segment_id": "SEG_002",
+      "road_type": "arterial",
+      "road_width": 7.5,
+      "road_surface": "asphalt",
+      "road_condition": 0.6,
+      "intersection_density": 0.5,
+      "traffic_level": 0.8,
+      "congestion": 0.7,
+      "vehicle_density": 0.8,
+      "lighting": 0.7,
+      "pedestrian_density": 0.5,
+      "weather_risk": 0.2
+    },
+    {
+      "segment_id": "SEG_003",
+      "road_type": "collector",
+      "road_width": 5.0,
+      "road_surface": "asphalt",
+      "road_condition": 0.3,
+      "intersection_density": 0.9,
+      "traffic_level": 0.6,
+      "congestion": 0.5,
+      "vehicle_density": 0.6,
+      "lighting": 0.5,
+      "pedestrian_density": 0.6,
+      "weather_risk": 0.3
+    },
+    {
+      "segment_id": "SEG_004",
+      "road_type": "arterial",
+      "road_width": 7.5,
+      "road_surface": "concrete",
+      "road_condition": 0.7,
+      "intersection_density": 0.6,
+      "traffic_level": 0.9,
+      "congestion": 0.9,
+      "vehicle_density": 0.9,
+      "lighting": 0.2,
+      "pedestrian_density": 0.8,
+      "weather_risk": 0.4
+    },
+    {
+      "segment_id": "SEG_005",
+      "road_type": "residential",
+      "road_width": 5.5,
+      "road_surface": "asphalt",
+      "road_condition": 0.9,
+      "intersection_density": 0.3,
+      "traffic_level": 0.3,
+      "congestion": 0.2,
+      "vehicle_density": 0.3,
+      "lighting": 0.8,
+      "pedestrian_density": 0.4,
+      "weather_risk": 0.1
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "dataset_size": 180,
+  "train_samples": 144,
+  "test_samples": 36,
+  "precision": 0.6388888888888888,
+  "recall": 1.0,
+  "f1": 0.7796610169491526,
+  "roc_auc": 0.588628762541806,
+  "confusion_matrix": [
+    [
+      0,
+      13
+    ],
+    [
+      0,
+      23
+    ]
+  ]
+}

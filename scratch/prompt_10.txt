@@ -1,0 +1,207 @@
+<USER_REQUEST>
+GRAPH HEALING ML V2 — IMPROVE RECOVERY QUALITY
+
+We now have a working and visually verified graph-healing pipeline.
+
+CURRENT BASELINE — FREEZE THIS
+
+The current deterministic London controlled topology-recovery experiment produces:
+
+Original graph edges: 1505
+Damaged graph edges: 1453
+Removed edges: 52
+Candidates generated: 3760
+Accepted healed candidates: 31
+Rejected candidates: 3729
+
+Ground-truth evaluation:
+True Positives: 12
+False Positives: 19
+False Negatives: 40
+
+Precision: 0.387
+Recall: 0.231
+F1: 0.289
+
+The graph visualization is now working correctly.
+
+DO NOT MODIFY THE FOLLOWING:
+
+- GraphML loading
+- MultiDiGraph structure
+- controlled topology damage
+- random seed
+- removed-edge selection
+- existing graph-healing validation architecture
+- visualization
+- frontend
+- routing
+- flood simulation
+- resilience engine
+- API contracts unless strictly necessary for ML diagnostics
+- baseline evaluation methodology
+
+The goal is to improve the ACTUAL graph-healing prediction quality.
+
+==================================================
+PHASE 1 — UNDERSTAND THE CURRENT PIPELINE
+==================================================
+
+Before changing anything, inspect:
+
+- candidate generation
+- candidate feature extraction
+- ML training
+- ML prediction
+- prediction threshold
+- validation gate
+- TP/FP/FN calculation
+
+Document the current pipeline:
+
+damaged graph
+→ candidate generation
+→ candidate features
+→ ML model
+→ prediction/probability
+→ validation
+→ healed graph
+→ evaluation
+
+Do not change code yet.
+
+Identify exactly which features are currently supplied to the ML model.
+
+==================================================
+PHASE 2 — IMPROVE CANDIDATE FEATURES
+==================================================
+
+Keep the current Random Forest as the baseline model.
+
+Do NOT immediately replace Random Forest.
+
+Add meaningful topology and geometry features where the existing GraphML data supports them.
+
+Po
+<truncated 8376 bytes>
+design it.
+
+Do not modify:
+
+- ORIGINAL / DAMAGED / HEALED visualization
+- graph statistics panel
+- map layers
+- legends
+- route UI
+
+Only expose additional ML diagnostics if needed.
+
+==================================================
+PHASE 16 — TESTS
+==================================================
+
+Keep all existing tests passing.
+
+Add tests for:
+
+1. feature extraction
+2. missing-feature handling
+3. candidate feature determinism
+4. candidate generation without ground-truth leakage
+5. class handling
+6. threshold behaviour
+7. model prediction
+8. validation gate
+9. healed graph integrity
+10. deterministic output
+
+Run:
+
+backend tests
+frontend tests
+graph-healing demo
+ML V2 experiment
+
+==================================================
+FINAL REPORT
+==================================================
+
+Return a concise technical report containing:
+
+A. CURRENT BASELINE
+
+Candidates:
+Accepted:
+TP:
+FP:
+FN:
+Precision:
+Recall:
+F1:
+
+B. ML V2
+
+Candidates:
+Accepted:
+TP:
+FP:
+FN:
+Precision:
+Recall:
+F1:
+
+C. FEATURE SET
+
+List every feature used by ML V2 and explain its meaning.
+
+D. CANDIDATE GENERATION
+
+Explain what legitimate constraints reduced the candidate space.
+
+E. MODEL
+
+Model:
+Number of trees:
+Class weighting:
+Prediction threshold:
+
+F. COMPARISON
+
+Explicitly state whether ML V2 improved:
+
+- precision
+- recall
+- F1
+
+Do not claim improvement if it did not occur.
+
+G. FALSE POSITIVE ANALYSIS
+
+Summarize the major causes discovered.
+
+H. FALSE NEGATIVE ANALYSIS
+
+Summarize the major causes discovered.
+
+I. DETERMINISM
+
+Run 1:
+Run 2:
+Run 3:
+
+J. TESTS
+
+Backend:
+Frontend:
+
+MOST IMPORTANT:
+
+The goal is not to make the numbers look better.
+
+The goal is to determine scientifically whether richer topology/geometry information actually improves graph healing.
+
+Keep the existing graph-healing architecture intact.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-26T01:06:23+05:30.
+</ADDITIONAL_METADATA>
