@@ -1,6 +1,10 @@
-﻿pandas
+pandas
 scikit-learn
 fastapi
 uvicorn
 pydantic
 numpy
+networkx
+shapely
+requests
+python-multipart
